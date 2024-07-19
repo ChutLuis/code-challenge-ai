@@ -1,22 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+interface Item {
+  type: string;
+  thickness: string;
+  dimensions: string;
+  quantity: number;
+}
+
 export interface RFQState {
-  value: number
+  quoted: Item[];
+  available: any;
+  to: string;
 }
 
 const initialState: RFQState = {
-  value: 0,
+  quoted: [],
+  available: [],
+  to: ''
 }
 
 export const rfqSlice = createSlice({
-  name: 'counter',
+  name: 'rfq',
   initialState,
   reducers: {
+    setRFQState(state, action: PayloadAction<Partial<RFQState>>) {
+      return { ...state, ...action.payload };
+    },
+    resetRFQState() {
+      return initialState;
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {  } = rfqSlice.actions
+export const { setRFQState, resetRFQState } = rfqSlice.actions
 
 export default rfqSlice.reducer

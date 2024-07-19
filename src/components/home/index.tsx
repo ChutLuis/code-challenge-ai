@@ -9,6 +9,9 @@ import SectionWrapper from "../hoc/SectionWrapper";
 import { useEffect, useState } from "react";
 import RFQService from "../../utils/apiService";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { resetRFQState } from "../../redux/rfqReducer";
+import { RootState } from "../../redux/rfqStore";
 interface RFQ {
   id: string;
   from: string;
@@ -22,9 +25,18 @@ interface RFQ {
 const Home = () => {
   const [rfqs, setRFQs] = useState<RFQ[]>([]);
   const navigate= useNavigate()
+  const dispatch = useDispatch()
+  const token = useSelector((state:RootState) => state.user.token);
 
   useEffect(() => {
-    RFQService.getAllRFQs().then((response) => {
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token, navigate]);
+  useEffect(() => {
+    dispatch(resetRFQState())
+
+    RFQService.getAllRFQs(token).then((response) => {
       const data = response.data as RFQ[];
 
       console.log(response);

@@ -1,18 +1,17 @@
 //apiFacade.ts
 
 import axios from "axios";
-
 const instance = axios.create({
   baseURL: "http://localhost:3000/",
   timeout: 15000,
   // headers: { "X-Custom-Header": "foobar" },
 });
 
+
+
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
-    
-
     return config;
   },
   function (error) {

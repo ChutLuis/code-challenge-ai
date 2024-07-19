@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import rfqReducer from './rfqReducer'
+import userReducer from './userReducer'
 
 export const store = configureStore({
   reducer: {
-    rfq:rfqReducer
+    rfq:rfqReducer,
+    user:userReducer
   },
 })
 
