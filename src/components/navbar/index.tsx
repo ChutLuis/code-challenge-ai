@@ -1,7 +1,5 @@
 import {
   Navbar,
-  MobileNav,
-  Typography,
   Button,
   IconButton,
   Collapse,

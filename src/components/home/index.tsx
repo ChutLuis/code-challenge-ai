@@ -1,8 +1,4 @@
 import {
-  Card,
-  CardBody,
-  CardHeader,
-  Input,
   Typography,
 } from "@material-tailwind/react";
 import SectionWrapper from "../hoc/SectionWrapper";
