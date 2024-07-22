@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import RFQService from "../../utils/apiService";
 import { Button, Card, CardBody, Typography } from "@material-tailwind/react";
 import emailjs from "@emailjs/browser";
-
+import { toast } from "react-toastify";
 const send = () => {
   let { id } = useParams();
   const { available, quoted, to } = useSelector(
@@ -113,11 +113,13 @@ const send = () => {
         import.meta.env.VITE_PKEY
       )
       .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
+        () => {
+          toast.success('The email was sent!')
+          navigate('/')
         },
-        (error) => {
-          console.log("FAILED...", error);
+        () => {
+          toast.error('An error has ocurred')
+          navigate('/')
         }
       );
   };

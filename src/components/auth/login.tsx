@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUserToken } from '../../redux/userReducer';
 import Logo from '../../assets/new-logo.svg'
 import RFQService from '../../utils/apiService';
+import { toast } from 'react-toastify';
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,17 +17,19 @@ const LoginPage = () => {
     if (username && password) {
       RFQService.logIn(username,password)
       .then((response) => {
+        console.log(response)
         const data = response.data as {userId:string,jwt:string}
         if(response.data){
           dispatch(setUserToken({token:data.jwt}))
         }
+        toast.info("Welcome!")
         navigate('/');
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {        
+        toast.error('Invalid Credentials')
       });
     } else {
-      alert('Invalid credentials');
+      toast.warn('Please add your credentials')
     }
   };
 
